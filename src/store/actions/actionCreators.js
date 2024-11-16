@@ -58,3 +58,4 @@ export const fetchStudent = (student) => {
     payload: student,
   };
 };
+ 

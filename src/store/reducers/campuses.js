@@ -19,3 +19,4 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
 };
 
 export default allCampuses;
+ 

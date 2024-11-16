@@ -44,3 +44,4 @@ AllCampusesView.propTypes = {
 };
 
 export default AllCampusesView;
+ 

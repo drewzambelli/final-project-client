@@ -58,3 +58,4 @@ AllCampusesContainer.propTypes = {
 // AllCampusesContainer uses "connect" function to connect to Redux Store and to read values from the Store 
 // (and re-read the values when the Store State updates).
 export default connect(mapState, mapDispatch)(AllCampusesContainer);
+ 
