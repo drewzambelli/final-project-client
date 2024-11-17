@@ -9,9 +9,10 @@ import Header from './Header';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 import NewStudentView from '../views/NewStudentView';
-import { addStudentThunk } from '../../store/thunks';
+import { addStudentThunk, fetchAllCampusesThunk } from '../../store/thunks';
 
 class NewStudentContainer extends Component {
   // Initialize state
@@ -20,11 +21,22 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "", 
       lastname: "", 
-      campusId: null, 
+      age: "",
+      yearInSchool: "",
+      email: "",
+      address: "",
+      campusId: "",
       redirect: false, 
-      redirectId: null
+      redirectId: null,
+      errors: {}
     };
   }
+
+    // Get all campuses data from back-end database
+    componentDidMount() {
+      console.log(this.props);
+      this.props.fetchAllCampuses();
+    }
 
   // Capture input data when it is entered
   handleChange = event => {
@@ -37,12 +49,32 @@ class NewStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
+    const { firstname, lastname, age, yearInSchool, email, address, campusId } = this.state;
+    let errors = {};
+
+    // Make sure user didn't leave anything blank
+    if (!firstname) errors.firstname = "First name is required.";
+    if (!lastname) errors.lastname = "Last name is required.";
+    if (!age || isNaN(age) || age <= 0) errors.age = "Please enter a valid age.";
+    if (!yearInSchool) errors.yearInSchool = "Year in school is required.";
+    if (!email || !/\S+@\S+\.\S+/.test(email)) errors.email = "Please enter a valid email address.";
+    if (!address) errors.address = "Address is required.";
+    if (!campusId) errors.campusId = "Please select a campus.";
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+  }
     let student = {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        campusId: this.state.campusId
+      firstname,
+      lastname,
+      age,
+      yearInSchool,
+      email,
+      address,
+      campusId
     };
-    
+  
     // Add new student in back-end database
     let newStudent = await this.props.addStudent(student);
 
@@ -50,9 +82,14 @@ class NewStudentContainer extends Component {
     this.setState({
       firstname: "", 
       lastname: "", 
-      campusId: null, 
+      age: "",
+      yearInSchool: "",
+      email: "",
+      address: "",
+      campusId: "", 
       redirect: true, 
-      redirectId: newStudent.id
+      redirectId: newStudent.id,
+      errors: {} //need to clear errors here otherwise errors out
     });
   }
 
@@ -74,12 +111,22 @@ class NewStudentContainer extends Component {
         <Header />
         <NewStudentView 
           handleChange = {this.handleChange} 
-          handleSubmit={this.handleSubmit}      
+          handleSubmit={this.handleSubmit}   
+          errors={this.state.errors} //error messages for field validation
+          allCampuses={this.props.allCampuses} //dropdown box campuses
         />
-      </div>          
+      </div>   
+             
     );
+    
   }
 }
+
+const mapState = (state) => {
+  return {
+    allCampuses: state.allCampuses,  //dropdown menu - copied over from allcampusescontainer
+  };
+};  
 
 // The following input argument is passed to the "connect" function used by "NewStudentContainer" component to connect to Redux Store.
 // The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
@@ -87,10 +134,19 @@ class NewStudentContainer extends Component {
 const mapDispatch = (dispatch) => {
     return({
         addStudent: (student) => dispatch(addStudentThunk(student)),
+        fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     })
 }
+
+//dropdown menu - copied from allcampusescontainer
+NewStudentContainer.propTypes = {
+  allCampuses: PropTypes.array.isRequired,
+  fetchAllCampuses: PropTypes.func.isRequired,
+};
+
+
 
 // Export store-connected container by default
 // NewStudentContainer uses "connect" function to connect to Redux Store and to read values from the Store 
 // (and re-read the values when the Store State updates).
-export default connect(null, mapDispatch)(NewStudentContainer);
+export default connect(mapState, mapDispatch)(NewStudentContainer);

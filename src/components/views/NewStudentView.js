@@ -35,10 +35,10 @@ const useStyles = makeStyles( () => ({
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const {handleChange, handleSubmit, errors } = props;
   const classes = useStyles();
 
-  // Render a New Student view with an input form
+  // Expanded the student input form with things I think a database should have
   return (
     <div>
       <h1>New Student</h1>
@@ -48,23 +48,68 @@ const NewStudentView = (props) => {
           <div className={classes.formTitle}>
             <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
               Add a Student
+              <br></br>
+              *All Fields Are Required*
             </Typography>
           </div>
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
             <input type="text" name="firstname" onChange ={(e) => handleChange(e)} />
+            {errors.firstname && <p style={{color: 'red'}}>{errors.firstname}</p>}
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
             <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
+            {errors.lastname && <p style={{color: 'red'}}>{errors.lastname}</p>}
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Age: </label>
+            <input type="number" name="age" onChange={(e) => handleChange(e)} />
+            {errors.age && <p style={{color: 'red'}}>{errors.age}</p>}
+            <br />
+            <br />
+
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Year: </label>
+            <select name="yearInSchool" onChange={(e) => handleChange(e)}>
+            <option value="">Select a Year</option>
+              <option value="freshman">Freshman</option>
+              <option value="sophomore">Sophomore</option>
+              <option value="junior">Junior</option>
+              <option value="senior">Senior</option>
+              <option value="5th+">5th Year or More</option>
+            </select>
+            {errors.yearInSchool && <p style={{color: 'red'}}>{errors.yearInSchool}</p>}
+            <br />
+            <br />
+
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
+            <input type="email" name="email" onChange={(e) => handleChange(e)} />
+            {errors.email && <p style={{color: 'red'}}>{errors.email}</p>}
+            <br />
+            <br />
+
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Address: </label>
+            <input type="text" name="address" onChange={(e) => handleChange(e)} />
+            {errors.address && <p style={{color: 'red'}}>{errors.address}</p>}
+            <br />
+            <br />
+            
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus: </label>
+            
+            <select name="campusId" onChange={(e) => handleChange(e)}>
+              <option value="">Select a Campus</option>
+              {props.allCampuses.map((campuses) => (
+              <option key={campuses.id} value={campuses.id}>
+                {campuses.name}
+              </option>
+              ))}
+
+            </select>
+            {errors.campusId && <p style={{color: 'red'}}>{errors.campusId}</p>}
+            <br />
+            <br />
 
             <Button variant="contained" color="primary" type="submit">
               Submit
@@ -79,3 +124,4 @@ const NewStudentView = (props) => {
 }
 
 export default NewStudentView;
+ 
