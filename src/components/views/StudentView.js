@@ -29,7 +29,7 @@ const StudentView = (props) => {
       <p><strong>Address:</strong> {student.address}</p>
 
       {/* Added Edit Button */}
-      <Link to={`/students/edit/${student.id}`} style={{ marginRight: '10px' }}>
+      <Link to={`/editstudent/${student.id}`} style={{ marginRight: '10px' }}>
         <button>Edit Student</button>
       </Link>
 
