@@ -98,7 +98,7 @@ const NewStudentView = (props) => {
             
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus: </label>
             
-            <select name="campusId" onChange={(e) => handleChange(e)}>
+            <select name="campusId" value={props.selectedCampusId || ""} onChange={(e) => handleChange(e)}>
               <option value="">Select a Campus</option>
               {props.allCampuses.map((campuses) => (
               <option key={campuses.id} value={campuses.id}>

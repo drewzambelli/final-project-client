@@ -18,6 +18,7 @@ class NewStudentContainer extends Component {
   // Initialize state
   constructor(props){
     super(props);
+    const { state } = this.props.location || {};
     this.state = {
       firstname: "", 
       lastname: "", 
@@ -25,7 +26,7 @@ class NewStudentContainer extends Component {
       yearInSchool: "",
       email: "",
       address: "",
-      campusId: "",
+      campusId: state ? state.campusId : "", //in case called from campus specific page
       redirect: false, 
       redirectId: null,
       errors: {}
@@ -114,6 +115,7 @@ class NewStudentContainer extends Component {
           handleSubmit={this.handleSubmit}   
           errors={this.state.errors} //error messages for field validation
           allCampuses={this.props.allCampuses} //dropdown box campuses
+          selectedCampusId={this.state.campusId} //if add student called from campus specific page, i use this to pre-populate campus selection menu
         />
       </div>   
              

@@ -17,7 +17,11 @@ const CampusView = (props) => {
       <h4>Campus Code: {campus.id}</h4>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
-      {campus.students.map( student => {
+
+      {/*List enrolled students */}
+      <h2>Enrolled Students</h2>
+      {campus.students && campus.students.length > 0 ? (
+      campus.students.map( student => {
         let name = student.firstname + " " + student.lastname;
         return (
           <div key={student.id}>
@@ -26,7 +30,12 @@ const CampusView = (props) => {
             </Link>             
           </div>
         );
-      })}
+      })
+      ) : (<p>No students currently enrolled at this campus.</p>)}
+  {/*Calls new student view from campus specific page, passing campus name/id to prepopulate campus selection menu */}
+  <Link to={{ pathname: "/newstudent", state: { campusId: campus.id, campusName: campus.name }}}>
+    <button>Add Student to {campus.name}</button>
+  </Link>
     </div>
   );
 };
