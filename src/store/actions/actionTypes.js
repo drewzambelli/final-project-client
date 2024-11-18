@@ -7,6 +7,7 @@ export const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
 export const FETCH_CAMPUS = "FETCH_CAMPUS";
 export const ADD_CAMPUS = "ADD_CAMPUS"; //adding campus
 export const DELETE_CAMPUS = "DELETE_CAMPUS"; //deleting campus
+export const EDIT_CAMPUS = "EDIT_CAMPUS"; //edit campus
 
 //All students
 export const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";

@@ -7,6 +7,7 @@ It constructs a React component to display the new campus page.
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom'; //for cancel button to take user back
 
 // Create styling for the input form
 const useStyles = makeStyles( () => ({
@@ -35,8 +36,9 @@ const useStyles = makeStyles( () => ({
 }));
 
 const NewCampusView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const {handleChange, handleSubmit, errors } = props;
   const classes = useStyles();
+  const history = useHistory(); //used by cancel button
 
   // Render a New Campus view with an input form
   return (
@@ -53,21 +55,27 @@ const NewCampusView = (props) => {
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
             <input type="text" name="name" onChange ={(e) => handleChange(e)} />
+            {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
             <input type="text" name="address" onChange={(e) => handleChange(e)} />
+            {errors.address && <p style={{ color: "red" }}>{errors.address}</p>}
             <br/>
             <br/>
 
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
             <input type="text" name="description" onChange ={(e) => handleChange(e)} />
+            {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
             <br/>
             <br/>
 
             <Button variant="contained" color="primary" type="submit">
               Submit
+            </Button>
+            <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
+              Cancel
             </Button>
             <br/>
             <br/>

@@ -27,6 +27,7 @@ export const fetchCampusThunk = (id) => async (dispatch) => {  // The THUNK
   try {
     // API "get" call to get a student data (based on "id")from database
     let res = await axios.get(`/api/campuses/${id}`);  
+    console.log("in fetchCampusThunk: ", res.data);
     dispatch(ac.fetchCampus(res.data));
   } catch(err) {
     console.error(err);
@@ -108,6 +109,16 @@ export const editStudentThunk = student => async dispatch => {  // The THUNK
     console.error(err);
   }
 };
+
+//Edit Campus
+export const editCampusThunk = (campus) => async dispatch => {
+  try {
+    let updatedCampus = await axios.put(`/api/campuses/${campus.id}`, campus);
+    dispatch(ac.editCampus(updatedCampus));
+  } catch(err) {
+    console.error(err);
+  }
+}
 
 // Single Student
 // THUNK CREATOR:

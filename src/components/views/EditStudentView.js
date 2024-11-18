@@ -9,6 +9,8 @@ that populates my dropdown menu
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom'; //cancel button takes you back to previous page
+
 
 // Create styling for the input form
 const useStyles = makeStyles(() => ({
@@ -35,6 +37,7 @@ const useStyles = makeStyles(() => ({
 const EditStudentView = (props) => {
   const { handleChange, handleSubmit, errors } = props;
   const classes = useStyles();
+  const history = useHistory(); //cancel button to prev page
   const { firstname, lastname, age, yearInSchool, email, address, campusId } = props.initialData;
 
   return (
@@ -108,6 +111,9 @@ const EditStudentView = (props) => {
 
             <Button variant="contained" color="primary" type="submit">
               Update
+            </Button>
+            <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
+                Cancel
             </Button>
             <br />
             <br />

@@ -7,6 +7,7 @@ It constructs a React component to display the single student view page.
 import React from 'react';
 import {Link, useHistory } from 'react-router-dom';
 import PropTypes from "prop-types";
+import Button from '@material-ui/core/Button';
 
 const StudentView = (props) => {
   const { student, deleteStudent } = props;
@@ -21,8 +22,9 @@ const StudentView = (props) => {
   return (
     <div>
       <h1>{student.firstname + " " + student.lastname}</h1>
+      <Link to={`/campus/${student.campus.id}`}>
       <h3>{student.campus.name}</h3>
-
+      </Link>
       <p><strong>Age:</strong> {student.age}</p>
       <p><strong>Year:</strong> {student.yearInSchool}</p>
       <p><strong>Email:</strong> {student.email}</p>
@@ -35,7 +37,11 @@ const StudentView = (props) => {
 
       {/* delete button */}
       <button onClick={handleDelete}>Delete Student</button>
-
+      <br/>
+      <br/>
+      <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
+        Go Back
+      </Button>      
     </div>
   );
 

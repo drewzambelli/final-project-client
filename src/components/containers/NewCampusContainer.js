@@ -22,20 +22,34 @@ class NewCampusContainer extends Component {
       address: "", 
       description: "",
       redirect: false, 
-      redirectId: null
+      redirectId: null,
+      errors: {}, //validation field stuff
     };
   }
 
   // Capture input data when it is entered
   handleChange = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      errors: { ...this.state.errors, [event.target.name]: "" }, //handles clearing errors
     });
   }
 
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+     
+    // Validate inputs
+     const errors = {};
+     if (!this.state.name.trim()) errors.name = "Campus name is required.";
+     if (!this.state.address.trim()) errors.address = "Address is required.";
+     if (!this.state.description.trim()) errors.description = "Description is required.";
+
+    // If there are errors, stop the user from submitting
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
 
     let campus = {
         name: this.state.name,
@@ -74,8 +88,9 @@ class NewCampusContainer extends Component {
       <div>
         <Header />
         <NewCampusView
-          handleChange = {this.handleChange} 
+          handleChange = {this.handleChange}    
           handleSubmit={this.handleSubmit}      
+          errors={this.state.errors} //pass errors
         />
       </div>          
     );

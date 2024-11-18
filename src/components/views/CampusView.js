@@ -5,16 +5,23 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display a single campus and its students (if any).
 ================================================== */
 import { Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom'; //go back button takes you back to previous page
+
 
 // Take in props data to construct the component
 const CampusView = (props) => {
   const {campus} = props;
-  
+  const history = useHistory(); //for Go Back button
+
   // Render a single Campus view with list of its students
   return (
     <div>
       <h1>{campus.name}</h1>
       <h4>Campus Code: {campus.id}</h4>
+      <Link to={`/editcampus/${campus.id}`}>
+        <button>Edit Campus</button>
+      </Link>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
 
@@ -36,6 +43,13 @@ const CampusView = (props) => {
   <Link to={{ pathname: "/newstudent", state: { campusId: campus.id, campusName: campus.name }}}>
     <button>Add Student to {campus.name}</button>
   </Link>
+
+  <br/>
+  <br/>
+  <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
+    Go Back
+  </Button>  
+  
     </div>
   );
 };

@@ -75,4 +75,11 @@ export const deleteCampus = (campusId) => {
   };
 };
 
+//Edit Campus
+export const editCampus = (campusId) => {
+  return {
+    type: at.EDIT_CAMPUS,
+    payload: campusId,
+  };
+};
  
