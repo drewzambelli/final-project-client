@@ -27,7 +27,6 @@ export const fetchCampusThunk = (id) => async (dispatch) => {  // The THUNK
   try {
     // API "get" call to get a student data (based on "id")from database
     let res = await axios.get(`/api/campuses/${id}`);  
-    console.log("in fetchCampusThunk: ", res.data);
     dispatch(ac.fetchCampus(res.data));
   } catch(err) {
     console.error(err);
@@ -130,6 +129,14 @@ export const checkEmailExistsThunk = (email) => async (dispatch) => {
     console.error("Error checking email existence", err);
     throw err;
   }
+};
+
+export const checkCampusNameExistsThunk = (name) => async (dispatch) => {
+  console.log("in checkcampusnameexiststhunk")
+  const response = await fetch(`/api/campuses/exists/${encodeURIComponent(name)}`);
+  console.log("still in thunk, response:", response)
+  const campusExists = await response.json();
+  return campusExists;
 };
 
 // Single Student

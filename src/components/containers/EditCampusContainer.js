@@ -10,8 +10,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import EditCampusView from '../views/EditCampusView';
-import { fetchCampusThunk, editCampusThunk } from '../../store/thunks';
-
+import { fetchCampusThunk, editCampusThunk, checkCampusNameExistsThunk } from '../../store/thunks';
 
 class EditCampusContainer extends Component {
 
@@ -50,6 +49,12 @@ class EditCampusContainer extends Component {
         });
     };
 
+      //Using this to call new check campus thunk
+    checkCampusNameExists = async (name) => {
+        const campusExists = await this.props.checkCampusNameExists(name);
+        return campusExists;
+    };
+
 // When user clicks:
 handleSubmit = async event => {
     event.preventDefault();
@@ -59,6 +64,18 @@ handleSubmit = async event => {
      if (!this.state.name.trim()) errors.name = "Campus name is required.";
      if (!this.state.address.trim()) errors.address = "Address is required.";
      if (!this.state.description.trim()) errors.description = "Description is required.";
+
+
+    // I'm checking here to see if the campus name already exists - i don't want
+    //people entering 2 of the same name
+    //the next line is a special declaration for the edit page only because i was 
+    //having a problem when a user tried to edit an existing program - my name check code
+    //was firing and preventing any updates to the campus because the code thought the
+    //campus already existed
+    const campusExists = this.state.name !== this.props.campus.name && await this.checkCampusNameExists(this.state.name);
+    if (campusExists) {
+      errors.name = `The campus name '${this.state.name}' is already registered to another campus. Please modify your campus name.`;
+    }
 
     // If there are errors, stop the user from submitting
     if (Object.keys(errors).length > 0) {
@@ -114,6 +131,7 @@ handleSubmit = async event => {
         return {
         fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
         editCampus: (campus) => dispatch(editCampusThunk(campus)),
+        checkCampusNameExists: (name) => dispatch(checkCampusNameExistsThunk(name)),
         };
     };
 

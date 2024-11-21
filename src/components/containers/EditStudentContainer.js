@@ -13,7 +13,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from "prop-types";
 
 import EditStudentView from '../views/EditStudentView';
-import { fetchStudentThunk, editStudentThunk } from '../../store/thunks';
+import { fetchStudentThunk, editStudentThunk, checkEmailExistsThunk } from '../../store/thunks';
 
 class EditStudentContainer extends Component {
   constructor(props) {
@@ -59,6 +59,12 @@ class EditStudentContainer extends Component {
     });
   };
 
+  // Check if the email already exists
+  checkEmailExists = async (email) => {
+    const emailExists = await this.props.checkEmailExists(email);
+    return emailExists;
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -73,6 +79,16 @@ class EditStudentContainer extends Component {
     if (!address) errors.address = "Address is required.";
     if (!campusId) errors.campusId = "Please select a campus.";
     if (!gpa || isNaN(gpa) || gpa < 0 || gpa > 4) errors.gpa = "Please enter a valid GPA between 0 and 4.";
+
+
+    // Need to do this here because handling it once it gets
+    //to the backend is way more complicated
+    const emailExists = this.state.email !== this.props.student.email && await this.checkEmailExists(this.state.email);
+
+    if (emailExists) {
+      errors.email = `The email '${this.state.email}' is already registered.`;
+    }
+
 
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
@@ -118,6 +134,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
   editStudent: (student) => dispatch(editStudentThunk(student)),
+  checkEmailExists: (email) => dispatch(checkEmailExistsThunk(email)),
 });
 
 EditStudentContainer.propTypes = {

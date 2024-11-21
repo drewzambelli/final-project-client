@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import NewCampusView from '../views/NewCampusView';
-import { addCampusThunk } from '../../store/thunks';
+import { addCampusThunk, checkCampusNameExistsThunk } from '../../store/thunks';
 
 class NewCampusContainer extends Component {
   // Initialize state
@@ -35,15 +35,28 @@ class NewCampusContainer extends Component {
     });
   }
 
+  //Using this to call new check campus thunk
+  checkCampusNameExists = async (name) => {
+    const campusExists = await this.props.checkCampusNameExists(name);
+    return campusExists;
+  };
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
-     
+
     // Validate inputs
      const errors = {};
      if (!this.state.name.trim()) errors.name = "Campus name is required.";
      if (!this.state.address.trim()) errors.address = "Address is required.";
      if (!this.state.description.trim()) errors.description = "Description is required.";
+     
+    // I'm checking here to see if the campus name already exists - i don't want
+    //people entering 2 of the same name
+    const campusExists = await this.checkCampusNameExists(this.state.name);
+    if (campusExists) {
+      errors.name = `The campus name '${this.state.name}' is already registered to another campus. Please modify your campus name.`;
+    }
 
     // If there are errors, stop the user from submitting
     if (Object.keys(errors).length > 0) {
@@ -57,6 +70,7 @@ class NewCampusContainer extends Component {
         description: this.state.description,
         //campusId: this.state.campusId
     };
+
     
     // Add new campus in back-end database
     let newCampus = await this.props.addCampus(campus);
@@ -103,6 +117,7 @@ class NewCampusContainer extends Component {
 const mapDispatch = (dispatch) => {
     return({
         addCampus: (campus) => dispatch(addCampusThunk(campus)),
+        checkCampusNameExists: (name) => dispatch(checkCampusNameExistsThunk(name)),
     })
 }
 
