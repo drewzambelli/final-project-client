@@ -20,7 +20,7 @@ const AllStudentsView = (props) => {
     );
   }
   
-  // If there is at least one student, render All Students view 
+  // If there is at least one student, show all the students + profile picture
   return (
     <div>
       <h1>All Students</h1>
@@ -32,7 +32,13 @@ const AllStudentsView = (props) => {
               <Link to={`/student/${student.id}`}>
                 <h2>{name}</h2>
               </Link>
-              <button onClick={() => deleteStudent(student.id)}>Delete</button>
+              <p>Student Profile Photo</p>
+              <img src={student.profilePhoto}
+              alt={`${student.firstname} ${student.lastname}`}
+              style={{ width: '150px', height: '150px', objectFit: 'cover' }} //forces picture into smaller space
+              />
+              <br/>
+              <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
               <hr/>
             </div>
           );

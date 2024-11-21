@@ -28,6 +28,7 @@ class NewStudentContainer extends Component {
       address: "",
       gpa: "",
       campusId: state ? state.campusId : "", //in case called from campus specific page
+      profilePhoto: "",
       redirect: false, 
       redirectId: null,
       errors: {}
@@ -57,7 +58,7 @@ class NewStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId } = this.state;
+    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId, profilePhoto } = this.state;
     let errors = {};
 
     // // Validate GPA
@@ -85,7 +86,9 @@ class NewStudentContainer extends Component {
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
       return;
-  }
+    }
+    const photoToSave = profilePhoto || "/blankprofile.jpg";
+
     let student = {
       firstname,
       lastname,
@@ -94,7 +97,8 @@ class NewStudentContainer extends Component {
       email,
       address,
       gpa,
-      campusId
+      campusId,
+      profilePhoto: photoToSave,
     };
   
     console.log("right before error occurs");
@@ -116,6 +120,7 @@ class NewStudentContainer extends Component {
       address: "",
       gpa: "",
       campusId: "", 
+      profilePhoto: "",
       redirect: true, 
       redirectId: newStudent.id,
       errors: {} //need to clear errors here otherwise errors out

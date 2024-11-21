@@ -30,6 +30,13 @@ const StudentView = (props) => {
       <p><strong>Email:</strong> {student.email}</p>
       <p><strong>Address:</strong> {student.address}</p>
       <p><strong>GPA:</strong> {student.gpa}</p>
+      <p>Student ID Photo</p>
+      <img src={student.profilePhoto}
+      alt={`${student.firstname} ${student.lastname}`}
+      style={{ width: '150px', height: '150px', objectFit: 'cover' }} //forces picture into smaller space
+      />
+      <br/>
+      <br/>
 
       {/* Added Edit Button */}
       <Link to={`/editstudent/${student.id}`} style={{ marginRight: '10px' }}>

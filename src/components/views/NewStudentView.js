@@ -119,6 +119,17 @@ const NewStudentView = (props) => {
             <br />
             <br />
 
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Profile Photo URL: </label>
+            <input
+              type="text"
+              name="profilePhoto"
+              onChange={(e) => handleChange(e)}
+              placeholder="Enter the URL of the profile photo"
+            />
+            {errors.profilePhoto && <p style={{ color: 'red' }}>{errors.profilePhoto}</p>}
+            <br />
+            <br />
+
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
