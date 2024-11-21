@@ -38,7 +38,7 @@ const EditStudentView = (props) => {
   const { handleChange, handleSubmit, errors } = props;
   const classes = useStyles();
   const history = useHistory(); //cancel button to prev page
-  const { firstname, lastname, age, yearInSchool, email, address, campusId } = props.initialData;
+  const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId } = props.initialData;
 
   return (
     <div>
@@ -92,6 +92,12 @@ const EditStudentView = (props) => {
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Address: </label>
             <input type="text" name="address" value={address} onChange={(e) => handleChange(e)} />
+            {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
+            <br />
+            <br />
+
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
+            <input type="number" step="0.01" name="gpa" value={gpa} onChange={(e) => handleChange(e)} />
             {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
             <br />
             <br />

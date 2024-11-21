@@ -97,6 +97,12 @@ const NewStudentView = (props) => {
             {errors.address && <p style={{color: 'red'}}>{errors.address}</p>}
             <br />
             <br />
+
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
+            <input type="number" step="0.01" min="0" max="4" name="gpa" onChange={(e) => handleChange(e)} />
+            {errors.gpa && <p style={{ color: 'red' }}>{errors.gpa}</p>}
+            <br />
+            <br />
             
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus: </label>
             

@@ -29,6 +29,7 @@ const StudentView = (props) => {
       <p><strong>Year:</strong> {student.yearInSchool}</p>
       <p><strong>Email:</strong> {student.email}</p>
       <p><strong>Address:</strong> {student.address}</p>
+      <p><strong>GPA:</strong> {student.gpa}</p>
 
       {/* Added Edit Button */}
       <Link to={`/editstudent/${student.id}`} style={{ marginRight: '10px' }}>

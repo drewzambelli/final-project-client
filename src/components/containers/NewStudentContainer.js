@@ -26,6 +26,7 @@ class NewStudentContainer extends Component {
       yearInSchool: "",
       email: "",
       address: "",
+      gpa: "",
       campusId: state ? state.campusId : "", //in case called from campus specific page
       redirect: false, 
       redirectId: null,
@@ -56,8 +57,13 @@ class NewStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    const { firstname, lastname, age, yearInSchool, email, address, campusId } = this.state;
+    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId } = this.state;
     let errors = {};
+
+    // // Validate GPA
+    // if (GPA < 0 || GPA > 4) {
+    //   errors.GPA = "GPA must be between 0 and 4.";
+    // }
 
     // Make sure user didn't leave anything blank
     if (!firstname) errors.firstname = "First name is required.";
@@ -67,6 +73,7 @@ class NewStudentContainer extends Component {
     if (!email || !/\S+@\S+\.\S+/.test(email)) errors.email = "Please enter a valid email address.";
     if (!address) errors.address = "Address is required.";
     if (!campusId) errors.campusId = "Please select a campus.";
+    if (!gpa || isNaN(gpa) || gpa < 0 || gpa > 4) errors.gpa = "Please enter a valid GPA between 0 and 4.";
 
      // Need to do this here because handling it once it gets
      //to the backend is way more complicated
@@ -86,6 +93,7 @@ class NewStudentContainer extends Component {
       yearInSchool,
       email,
       address,
+      gpa,
       campusId
     };
   
@@ -106,6 +114,7 @@ class NewStudentContainer extends Component {
       yearInSchool: "",
       email: "",
       address: "",
+      gpa: "",
       campusId: "", 
       redirect: true, 
       redirectId: newStudent.id,
