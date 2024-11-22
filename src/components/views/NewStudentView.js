@@ -117,7 +117,7 @@ const NewStudentView = (props) => {
             </select>
             {errors.campusId && <p style={{color: 'red'}}>{errors.campusId}</p>}
             <br />
-            <br />
+            <br /> 
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Profile Photo URL: </label>
             <input

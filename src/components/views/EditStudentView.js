@@ -95,7 +95,7 @@ const EditStudentView = (props) => {
             {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
             <br />
             <br />
-
+ 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
             <input type="number" step="0.01" name="gpa" value={gpa} onChange={(e) => handleChange(e)} />
             {errors.address && <p style={{ color: 'red' }}>{errors.address}</p>}
@@ -126,7 +126,7 @@ const EditStudentView = (props) => {
             <br/>
             {/*allow user to preview picture - the absolute pathing for blankprofile is super important because i'm displaying the image based on what
             is in the URL field. If i don't have the first slash, nothing is displayed. */}
-            <img src={profilePhoto.trim() === '' ? '/blankprofile.jpg' : profilePhoto} alt="Profile Preview" style={{ width: '150px', marginTop: '10px' }} />
+            <img src={profilePhoto.trim() === '' ? '/blankprofile.jpg' : profilePhoto} alt="Profile Preview" style={{ width: '150px', height: '150px', objectFit: 'cover', marginTop: '10px' }} />
             {errors.profilePhoto && <p style={{ color: 'red' }}>{errors.profilePhoto}</p>}
             <br />
             <br />

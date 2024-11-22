@@ -94,6 +94,17 @@ class EditStudentContainer extends Component {
     //Check profilePhoto completed
     const updatedProfilePhoto = this.state.profilePhoto.trim() === "" ? "/blankprofile.jpg" : this.state.profilePhoto;
 
+    // Validate campus profile shot URL here - I was getting strange behaviour using errors above
+    if (this.state.profilePhoto.trim()) {
+      try {
+          const response = await fetch(this.state.profilePhoto.trim(), { method: 'HEAD' });
+          if (!response.ok) {
+              errors.profilePhoto = "The provided student photo URL is invalid.";
+          }
+      } catch (err) {
+          errors.profilePhoto = "The provided student photo URL is invalid.";
+      }
+    }
 
 
     if (Object.keys(errors).length > 0) {

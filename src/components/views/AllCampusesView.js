@@ -6,8 +6,32 @@ It constructs a React component to display all campuses.
 ================================================== */
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import { useState } from "react"; //using to alert usr why we can't delete
 const AllCampusesView = (props) => {
+
+  const [errorMessages, setErrorMessages] = useState({});
+  //I'm using this to tell the user why they can't delete a campus - prior to this, if a student was
+  //associated with a campus and you clicked the Delete Campus button, nothing happened which is correct.
+  //However, that might be confusing for a user so I want to tell user why they can't - you can't delete
+  //a campus that has student associated with it because a student can't be in the database without being
+  //registered with a campus
+  const handleDelete = (campus) => {
+    if (campus.students.length > 0) {
+      //using campus.id because if i don't, the error appears below all campus delete buttons
+      //this way it has campus ID and knows where to appear
+      setErrorMessages((prev) => ({
+        ...prev,
+        [campus.id]: `Cannot delete campus "${campus.name}" because it has associated students.`,
+      }));
+    } else {
+      setErrorMessages((prev) => ({
+        ...prev,
+        [campus.id]: "", // This is where i clear the error for the campus
+      }));
+      props.deleteCampus(campus.id);
+    }
+  };
+
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
     return (
@@ -42,9 +66,13 @@ const AllCampusesView = (props) => {
           />
           <br/>
           {/*Adding a delete button here for each campus */}
-          <button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>
+          {/*<button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>*/}
+          <button onClick={() => handleDelete(campus)}>Delete Campus</button>
+          {/*targetted error message using campus.id to prvent multiple error messages from appearing with all campuses */}
+          {errorMessages[campus.id] && (<p style={{ color: "red" }}>{errorMessages[campus.id]}</p>)} 
           <hr/>
         </div>
+        
       ))}
       <br/>
       <Link to={`/newcampus`}>

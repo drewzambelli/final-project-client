@@ -8,7 +8,7 @@ import Header from './Header';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+ 
 import EditCampusView from '../views/EditCampusView';
 import { fetchCampusThunk, editCampusThunk, checkCampusNameExistsThunk } from '../../store/thunks';
 
@@ -20,6 +20,7 @@ class EditCampusContainer extends Component {
         name: "",
         address: "",
         description: "",
+        campusPhoto: "",
         redirect: false, 
         redirectId: null,
         errors: {},
@@ -37,6 +38,7 @@ class EditCampusContainer extends Component {
                 name: campus.name || "",
                 address: campus.address || "",
                 description: campus.description || "",
+                campusPhoto: campus.campusPhoto || "",
             });
         }
     }
@@ -77,6 +79,21 @@ handleSubmit = async event => {
       errors.name = `The campus name '${this.state.name}' is already registered to another campus. Please modify your campus name.`;
     }
 
+    //Check profilePhoto completed
+    const updateCampusPhoto = this.state.campusPhoto.trim() === "" ? "/blankcampus.jpg" : this.state.campusPhoto;
+    
+    // Validate campus profile shot URL here - I was getting strange behaviour using errors above
+    if (this.state.campusPhoto.trim()) {
+        try {
+            const response = await fetch(this.state.campusPhoto.trim(), { method: 'HEAD' });
+            if (!response.ok) {
+                errors.campusPhoto = "The provided campus photo URL is invalid.";
+            }
+        } catch (err) {
+            errors.campusPhoto = "The provided campus photo URL is invalid.";
+        }
+    }
+
     // If there are errors, stop the user from submitting
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
@@ -89,6 +106,7 @@ handleSubmit = async event => {
         name: this.state.name,
         address: this.state.address,
         description: this.state.description,
+        campusPhoto: updateCampusPhoto,
         };
         
         // Dispatch the edit action

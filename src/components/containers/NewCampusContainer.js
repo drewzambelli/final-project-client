@@ -59,6 +59,18 @@ class NewCampusContainer extends Component {
       errors.name = `The campus name '${this.state.name}' is already registered to another campus. Please modify your campus name.`;
     }
 
+    // Validate campus profile shot URL here - I was getting strange behaviour using errors above
+    if (this.state.campusPhoto.trim()) {
+      try {
+          const response = await fetch(this.state.campusPhoto.trim(), { method: 'HEAD' });
+          if (!response.ok) {
+              errors.campusPhoto = "The provided campus photo URL is invalid.";
+          }
+      } catch (err) {
+          errors.campusPhoto = "The provided campus photo URL is invalid.";
+      }
+    }
+
     // If there are errors, stop the user from submitting
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });

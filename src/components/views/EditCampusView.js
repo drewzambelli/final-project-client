@@ -96,6 +96,21 @@ const useStyles = makeStyles(() => ({
                         )}
                         <br />
                         <br />
+                        <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Photo URL: </label>
+                        <input
+                        type="text"
+                        name="campusPhoto"
+                        value= {campus.campusPhoto}
+                        onChange={(e) => handleChange(e)}
+                        placeholder="Enter the URL of the profile photo"
+                        />
+                        <br/>
+                        {/*allow user to preview picture - the absolute pathing for blankprofile is super important because i'm displaying the image based on what
+                        is in the URL field. If i don't have the first slash, nothing is displayed. */}
+                        <img src={campus.campusPhoto.trim() === '' ? '/blankcampus.jpg' : campus.campusPhoto} alt="Profile Preview" style={{ width: '150px', marginTop: '10px' }} />
+                        {errors.campusPhoto && <p style={{ color: 'red' }}>{errors.campusPhoto}</p>}
+                        <br />
+                        <br />
 
                         <Button variant="contained" color="primary" type="submit">
                             Update
