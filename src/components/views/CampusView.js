@@ -24,6 +24,13 @@ const CampusView = (props) => {
       </Link>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
+      <p>Campus Profile Photo</p>
+      <img src={campus.campusPhoto}
+      alt={`${campus.name}`}
+      style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space
+      />
+      <br/>
+      <br/>
 
       {/*List enrolled students */}
       <h2>Enrolled Students</h2>

@@ -27,6 +27,7 @@ class EditStudentContainer extends Component {
       address: "",
       gpa: "",
       campusId: "",
+      profilePhoto: "",
       errors: {},
       isLoading: true,
     };
@@ -37,7 +38,7 @@ class EditStudentContainer extends Component {
     const studentId = this.props.match.params.id;
     await this.props.fetchStudent(studentId);
     
-    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId } = this.props.student;
+    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId, profilePhoto } = this.props.student;
 
     console.log(this.props.student);
     this.setState({
@@ -49,6 +50,7 @@ class EditStudentContainer extends Component {
       address,
       gpa,
       campusId,
+      profilePhoto,
       isLoading: false,
     });
   }
@@ -67,8 +69,8 @@ class EditStudentContainer extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
-    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId } = this.state;
+    
+    const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId, profilePhoto } = this.state;
     let errors = {};
 
     if (!firstname) errors.firstname = "First name is required.";
@@ -89,6 +91,10 @@ class EditStudentContainer extends Component {
       errors.email = `The email '${this.state.email}' is already registered.`;
     }
 
+    //Check profilePhoto completed
+    const updatedProfilePhoto = this.state.profilePhoto.trim() === "" ? "/blankprofile.jpg" : this.state.profilePhoto;
+
+
 
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
@@ -97,7 +103,7 @@ class EditStudentContainer extends Component {
     //Drew! Do not mess with this. This was your problem, you weren't passing ID of student - here you
     //are combing student ID and other data associated with the student and passing it to the THUNK.
     const studentId = this.props.match.params.id;
-    const student = { firstname, lastname, age, yearInSchool, email, address, gpa, campusId };
+    const student = { firstname, lastname, age, yearInSchool, email, address, gpa, campusId, profilePhoto: updatedProfilePhoto };
     const studentInfo = {...student, id: studentId};
     await this.props.editStudent(studentInfo);
     this.setState({ redirect: true });

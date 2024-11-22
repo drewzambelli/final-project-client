@@ -38,7 +38,7 @@ const EditStudentView = (props) => {
   const { handleChange, handleSubmit, errors } = props;
   const classes = useStyles();
   const history = useHistory(); //cancel button to prev page
-  const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId } = props.initialData;
+  const { firstname, lastname, age, yearInSchool, email, address, gpa, campusId, profilePhoto } = props.initialData;
 
   return (
     <div>
@@ -112,6 +112,22 @@ const EditStudentView = (props) => {
               ))}
             </select>
             {errors.campusId && <p style={{ color: 'red' }}>{errors.campusId}</p>}
+            <br />
+            <br />
+
+            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Profile Photo URL: </label>
+            <input
+              type="text"
+              name="profilePhoto"
+              value= {profilePhoto}
+              onChange={(e) => handleChange(e)}
+              placeholder="Enter the URL of the profile photo"
+            />
+            <br/>
+            {/*allow user to preview picture - the absolute pathing for blankprofile is super important because i'm displaying the image based on what
+            is in the URL field. If i don't have the first slash, nothing is displayed. */}
+            <img src={profilePhoto.trim() === '' ? '/blankprofile.jpg' : profilePhoto} alt="Profile Preview" style={{ width: '150px', marginTop: '10px' }} />
+            {errors.profilePhoto && <p style={{ color: 'red' }}>{errors.profilePhoto}</p>}
             <br />
             <br />
 

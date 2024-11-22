@@ -21,6 +21,7 @@ class NewCampusContainer extends Component {
       name: "", 
       address: "", 
       description: "",
+      campusPhoto: "",
       redirect: false, 
       redirectId: null,
       errors: {}, //validation field stuff
@@ -64,10 +65,14 @@ class NewCampusContainer extends Component {
       return;
     }
 
+    //const campusToSave = this.state.campusPhoto.trim() || "/blankcampus.jpg";
+    const campusToSave = this.state.campusPhoto.trim() || "/blankcampus.jpg";
+    
     let campus = {
         name: this.state.name,
         address: this.state.address,
         description: this.state.description,
+        campusPhoto: campusToSave,
         //campusId: this.state.campusId
     };
 
@@ -80,6 +85,7 @@ class NewCampusContainer extends Component {
       name: "", 
       address: "", 
       description: "", 
+      campusPhoto: "",
       redirect: true, 
       redirectId: newCampus.id
     });

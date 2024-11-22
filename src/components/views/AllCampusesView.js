@@ -35,6 +35,12 @@ const AllCampusesView = (props) => {
           {/*<h4>campus id: {campus.id}</h4>*/}
           <p>{campus.address}</p>
           <p>{campus.description}</p>
+          <p>Campus Profile Photo</p>
+          <img src={campus.campusPhoto}
+          alt={`${campus.name}`}
+          style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space
+          />
+          <br/>
           {/*Adding a delete button here for each campus */}
           <button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>
           <hr/>
