@@ -6,6 +6,7 @@ Custom View EditCampusView. Child.
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import '../../styles/globalStyles.css';
 import { useHistory } from 'react-router-dom'; //cancel button takes you back to previous page
 
 // Create styling for the input form
@@ -35,7 +36,7 @@ const useStyles = makeStyles(() => ({
     const classes = useStyles();
     const history = useHistory(); //cancel button to prev page
     return (
-        <div>
+        <div className = "edit-campus-container">
             <h1>Edit Campus</h1>
             <div className={classes.root}>
                 <div className={classes.formContainer}>

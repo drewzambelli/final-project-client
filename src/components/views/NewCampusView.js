@@ -7,6 +7,7 @@ It constructs a React component to display the new campus page.
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import '../../styles/globalStyles.css';
 import { useHistory } from 'react-router-dom'; //for cancel button to take user back
 
 // Create styling for the input form
@@ -42,7 +43,7 @@ const NewCampusView = (props) => {
 
   // Render a New Campus view with an input form
   return (
-    <div>
+    <div className = "add-campus-container">
       <h1>New Campus</h1>
 
       <div className={classes.root}>

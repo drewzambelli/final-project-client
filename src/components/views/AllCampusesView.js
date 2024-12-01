@@ -6,6 +6,7 @@ It constructs a React component to display all campuses.
 ================================================== */
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import '../../styles/globalStyles.css';
 import { useState } from "react"; //using to alert usr why we can't delete
 const AllCampusesView = (props) => {
 
@@ -48,18 +49,17 @@ const AllCampusesView = (props) => {
 
   // If there is at least one campus, render All Campuses view 
   return (
-    <div>
-      <h1>All Campuses</h1>
+    <div className = 'all-campuses-container'>
+      <h1>-All Campuses-</h1>
 
       {props.allCampuses.map((campus) => (
         <div key={campus.id}>
           <Link to={`/campus/${campus.id}`}>
-            <h2>{campus.name}</h2>
+            <h2 className = "name-link">{campus.name}</h2>
           </Link>
           {/*<h4>campus id: {campus.id}</h4>*/}
           <p>{campus.address}</p>
           <p>{campus.description}</p>
-          <p>Campus Profile Photo</p>
           <img src={campus.campusPhoto}
           alt={`${campus.name}`}
           style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space

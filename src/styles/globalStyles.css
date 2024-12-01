@@ -1,0 +1,143 @@
+/*General styles. I like maroons, burgundies, gold/burnished-gold, salmon pink and royal/navy blue
+so I'm trying to stick to those colors generally
+Also, i'm using what has now become my favourite font: poppins*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+
+/* GENERAL STUFF ACCROSS THE SITE*/
+h1 {
+    color: #313ef5; /* deep royal-ish blue */
+    font-family: 'Poppins', sans-serif; /* I've been using this font for most assignments, i like it*/
+    font-size: 3rem;  
+    font-weight: 700;  
+    text-transform: uppercase;  
+    letter-spacing: 2px; 
+    padding: 20px 0;  
+    margin: 20px 0;  
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+  }
+
+  button {
+    background-color: #8b0000;  /* Button color */
+    color: #fcd849;  /* Text color */
+    font-family: 'Poppins'; 
+    font-size: 16px;  
+    padding:10px 20px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background-color 0.3s ease; 
+  }
+
+  p {
+    color:#000000;
+    margin: 0px;
+    font-family: 'Poppins'; 
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  {/*Used for College / Student Names*/}
+  .name-link {
+    color: #8b0000;
+    font-family: 'Poppins', sans-serif;  
+    transition: color 0.3s ease;  
+    padding: 0;
+    margin: 0;
+  }
+
+  .name-link:hover {
+    color:rgb(47, 66, 236); 
+  }
+  
+  {/*Need this to override default underlining of links*/}
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  {/*Button on my site turn blue upon hover*/}
+  button:hover {
+    background-color: #313ef5;
+  }
+
+/* MISCELLANEOUS SPOT FIX STUFF */
+
+/* CAMPUS STUFF */
+.all-campuses-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    background-color: #f3dbd7; /*slightly lighter salmony-pink. I think it helps readability*/
+}
+.single-campus-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    background-color: #f3dbd7; /*slightly lighter salmony-pink. I think it helps readability*/
+}
+
+.edit-campus-container {
+    max-width: 500px;
+    margin: auto;
+    border: 1px solid #000000;
+    padding: 5px;
+    margin-top: 20px; /*necessary to give me the space i want between header and form*/
+    border-radius: 5px;
+    background-color:#f3dbd7;
+}
+
+.add-campus-container {
+    max-width: 500px;
+    margin: auto;
+    border: 1px solid #000000;
+    padding: 5px;
+    border-radius: 5px;
+    background-color:#f3dbd7;
+    margin-top: 20px; /*necessary to give me the space i want between header and form*/
+}
+
+
+/* STUDENT STUFF */
+.all-students-container {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    background-color:#f3dbd7;
+}
+
+.single-students-container {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    background-color:#f3dbd7;
+}
+
+.add-student-form {
+    max-width: 500px;
+    margin: auto;
+    border: 1px solid #000000;
+    padding:5px;
+    border-radius: 5px;
+    background-color:#f3dbd7;
+    margin-top: 20px; /*necessary to give me the space i want between header and form*/
+}
+
+.edit-student-form {
+    max-width: 500px;
+    margin: auto;
+    border: 1px solid #000000;
+    padding: 5px;
+    border-radius: 5px;
+    background-color:#f3dbd7;
+    margin-top: 20px; /*necessary to give me the space i want between header and form*/
+}

@@ -7,6 +7,7 @@ It constructs a React component to display the new student page.
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import '../../styles/globalStyles.css';
 import { useHistory } from 'react-router-dom'; //cancel button takes you back to previous page
 
 // Create styling for the input form
@@ -33,6 +34,7 @@ const useStyles = makeStyles( () => ({
     borderRadius: '5px 5px 0px 0px',
     padding: '3px'
   },
+
 }));
 
 const NewStudentView = (props) => {
@@ -42,7 +44,8 @@ const NewStudentView = (props) => {
 
   // Expanded the student input form with things I think a database should have
   return (
-    <div>
+    <div className = "add-student-form ">
+      
       <h1>New Student</h1>
 
       <div className={classes.root}>

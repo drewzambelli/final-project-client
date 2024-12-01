@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Link } from 'react-router-dom';
+import { colors } from '@material-ui/core';
+
 
 // Define styling for the header
 const useStyles = makeStyles(theme => ({
@@ -22,12 +24,12 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     textAlign: 'left',
     fontType: 'bold',
-    fontFamily: 'sans-serif', 
+    fontFamily: 'poppins', /*This is the font I want on the site*/
     fontSize: '35px', 
-    color: 'darkblue'
+    color: '#ebc220' /*i want something closer to gold*/
   },
   appBar:{
-    backgroundColor: '#fcb6bb',
+    backgroundColor: '#8b0000', /*burgandy-ish color */
     shadows: ['none'],
   },
   greeting:{
@@ -37,9 +39,23 @@ const useStyles = makeStyles(theme => ({
     width: "50%",
     margin: "auto",
   },
-  links:{
-    textDecoration: 'none',
-  }
+  // links:{
+  //   textDecoration: 'none',
+  //   marginRight: theme.spacing(2),
+  //   backgroundColor: '#ffd700', // Gold
+  //   color: '#5c3a2e', // Maroon text
+  //   '&:hover': {
+  //     backgroundColor: '#daa520', // Burnished gold on hover
+  // }
+  // },
+  button: {
+    marginRight: theme.spacing(2),
+    backgroundColor: '#ffd700', // Gold
+    color: '#5c3a2e', // Maroon text
+    '&:hover': {
+      backgroundColor: '#daa520', // Burnished gold on hover
+  },
+},
 }));
 
 // Header component, displayed on every page
@@ -54,20 +70,20 @@ const Header = () => {
             Campus Management System
           </Typography>
 
-          <Link className={classes.links} to={'/'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+          <Link className={classes.button} to={'/'} >
+            <Button variant="contained" >
               Home
             </Button>
           </Link>
 
-          <Link className={classes.links} to={'/campuses'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+          <Link className={classes.button} to={'/campuses'} >
+            <Button variant="contained" >
               All Campuses
             </Button>
           </Link>
 
-          <Link className={classes.links} to={'/students'} >
-            <Button variant="contained" color="primary">
+          <Link className={classes.button} to={'/students'} >
+            <Button variant="contained">
               All Students
             </Button>
           </Link>

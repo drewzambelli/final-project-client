@@ -6,6 +6,7 @@ It constructs a React component to display a single campus and its students (if 
 ================================================== */
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import '../../styles/globalStyles.css';
 import { useHistory } from 'react-router-dom'; //go back button takes you back to previous page
 
 
@@ -16,7 +17,7 @@ const CampusView = (props) => {
 
   // Render a single Campus view with list of its students
   return (
-    <div>
+    <div className = "single-campus-container" >
       <h1>{campus.name}</h1>
       <h4>Campus Code: {campus.id}</h4>
       <Link to={`/editcampus/${campus.id}`}>
@@ -24,7 +25,6 @@ const CampusView = (props) => {
       </Link>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
-      <p>Campus Profile Photo</p>
       <img src={campus.campusPhoto}
       alt={`${campus.name}`}
       style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space

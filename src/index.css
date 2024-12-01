@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: #fcf9ec; I want more of a blue-ish background  #fff8dc */
+  color: #313ef5;
 }
 
 code {

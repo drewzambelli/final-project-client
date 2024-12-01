@@ -8,6 +8,7 @@ import React from 'react';
 import {Link, useHistory } from 'react-router-dom';
 import PropTypes from "prop-types";
 import Button from '@material-ui/core/Button';
+import '../../styles/globalStyles.css';
 
 const StudentView = (props) => {
   const { student, deleteStudent } = props;
@@ -20,7 +21,7 @@ const StudentView = (props) => {
 
   // Render a single Student view 
   return (
-    <div>
+    <div className = "single-students-container">
       <h1>{student.firstname + " " + student.lastname}</h1>
       <Link to={`/campus/${student.campus.id}`}>
       <h3>{student.campus.name}</h3>
