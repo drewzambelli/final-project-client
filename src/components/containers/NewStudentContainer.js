@@ -97,7 +97,7 @@ class NewStudentContainer extends Component {
     //New URL validation - was getting lots of bugs with old routine above. Pulled URLPATTERN
     //from StackOverflow.
     const urlPattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))(?:\?.*)?$/i;
-    if (profilePhoto.trim() && !urlPattern.test(profilePhoto.trim())) {
+    if (profilePhoto.trim() && !urlPattern.test(profilePhoto.trim()) && profilePhoto.trim() !== "/blankprofile.jpg" && profilePhoto.trim() !== "") {
       errors.profilePhoto = "The provided student photo URL is invalid.";
     }
 

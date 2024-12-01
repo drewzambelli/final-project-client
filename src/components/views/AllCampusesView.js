@@ -51,27 +51,27 @@ const AllCampusesView = (props) => {
   return (
     <div className = 'all-campuses-container'>
       <h1>-All Campuses-</h1>
-
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id}>
-          <Link to={`/campus/${campus.id}`}>
-            <h2 className = "name-link">{campus.name}</h2>
-          </Link>
-          {/*<h4>campus id: {campus.id}</h4>*/}
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
-          <img src={campus.campusPhoto}
-          alt={`${campus.name}`}
-          style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space
-          />
-          <br/>
-          {/*Adding a delete button here for each campus */}
-          {/*<button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>*/}
-          <button onClick={() => handleDelete(campus)}>Delete Campus</button>
-          {/*targetted error message using campus.id to prvent multiple error messages from appearing with all campuses */}
-          {errorMessages[campus.id] && (<p style={{ color: "red" }}>{errorMessages[campus.id]}</p>)} 
-          <hr/>
-        </div>
+      
+      {props.allCampuses.map((campus) => (     
+          <div key={campus.id} className = 'campus-card'>
+            <Link to={`/campus/${campus.id}`}>
+              <h2 className = "name-link">{campus.name}</h2>
+            </Link>
+            {/*<h4>campus id: {campus.id}</h4>*/}
+            <p className = 'campus-address'>{campus.address}</p>
+            <p className = 'campus-description'>{campus.description}</p>
+            <img src={campus.campusPhoto}
+            alt={`${campus.name}`}
+            style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space
+            />
+            <br/>
+            {/*Adding a delete button here for each campus */}
+            {/*<button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>*/}
+            <button onClick={() => handleDelete(campus)}>Delete Campus</button>
+            {/*targetted error message using campus.id to prvent multiple error messages from appearing with all campuses */}
+            {errorMessages[campus.id] && (<p style={{ color: "red" }}>{errorMessages[campus.id]}</p>)} 
+            
+          </div>
         
       ))}
       <br/>

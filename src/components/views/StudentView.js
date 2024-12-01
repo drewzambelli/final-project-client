@@ -22,32 +22,39 @@ const StudentView = (props) => {
   // Render a single Student view 
   return (
     <div className = "single-students-container">
-      <h1>{student.firstname + " " + student.lastname}</h1>
+      <h1 style={{margin: '0px', padding: '0px'}}>{student.firstname + " " + student.lastname}</h1>
       <Link to={`/campus/${student.campus.id}`}>
-      <h3>{student.campus.name}</h3>
+      <h3 className = "custom-uni-title">{student.campus.name}</h3>
       </Link>
-      <p><strong>Age:</strong> {student.age}</p>
-      <p><strong>Year:</strong> {student.yearInSchool}</p>
-      <p><strong>Email:</strong> {student.email}</p>
-      <p><strong>Address:</strong> {student.address}</p>
-      <p><strong>GPA:</strong> {student.gpa}</p>
-      <p>Student ID Photo</p>
-      <img src={student.profilePhoto}
-      alt={`${student.firstname} ${student.lastname}`}
-      style={{ width: '150px', height: '150px', objectFit: 'cover' }} //forces picture into smaller space
-      />
+
+      <div className = 'student-info'>        
+        <img src={student.profilePhoto}
+        alt={`${student.firstname} ${student.lastname}`}
+        style={{ width: '150px', height: '150px', objectFit: 'cover' }} //forces picture into smaller space
+        className = 'student-photo'
+        />
+        <div className = 'student-details'>
+          <p><strong>Age:</strong> {student.age}</p>
+          <p><strong>Year:</strong> {student.yearInSchool}</p>
+          <p><strong>GPA:</strong> {student.gpa}</p>
+          <p><strong>Email:</strong> {student.email}</p>
+          <p><strong>Address:</strong> {student.address}</p>
+          
+        </div>
+      </div>
+      <br/>
+      <div className = 'student-view-buttons'>
+        {/* Added Edit Button */}
+        <Link to={`/editstudent/${student.id}`} style={{ marginRight: '10px' }}>
+          <button>Edit Student</button>
+        </Link>
+
+        {/* delete button */}
+        <button onClick={handleDelete}>Delete Student</button>
+      </div>
       <br/>
       <br/>
 
-      {/* Added Edit Button */}
-      <Link to={`/editstudent/${student.id}`} style={{ marginRight: '10px' }}>
-        <button>Edit Student</button>
-      </Link>
-
-      {/* delete button */}
-      <button onClick={handleDelete}>Delete Student</button>
-      <br/>
-      <br/>
       <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
         Go Back
       </Button>      

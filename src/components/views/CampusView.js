@@ -18,29 +18,29 @@ const CampusView = (props) => {
   // Render a single Campus view with list of its students
   return (
     <div className = "single-campus-container" >
-      <h1>{campus.name}</h1>
-      <h4>Campus Code: {campus.id}</h4>
-      <Link to={`/editcampus/${campus.id}`}>
-        <button>Edit Campus</button>
-      </Link>
-      <p>{campus.address}</p>
-      <p>{campus.description}</p>
+      <h1 className = "campus-header">{campus.name}</h1>
+      <h4 className = 'campus-code'>Campus Code: {campus.id}</h4>
+      <p className = "campus-address">{campus.address}</p>
+      <p className = "campus-description">{campus.description}</p>
       <img src={campus.campusPhoto}
       alt={`${campus.name}`}
       style={{ width: '400px', height: '250px', objectFit: 'cover' }} //forces picture into smaller space
       />
       <br/>
-      <br/>
+      <Link to={`/editcampus/${campus.id}`}>
+        <button>Edit Campus</button>
+      </Link>
+      <hr className = 'custom-hr'/>
 
       {/*List enrolled students */}
-      <h2>Enrolled Students</h2>
+      <h2 style={{ textDecoration: "underline", color: 'Black', margin: '0px' }}>{campus.name} Enrollees</h2>
       {campus.students && campus.students.length > 0 ? (
       campus.students.map( student => {
         let name = student.firstname + " " + student.lastname;
         return (
           <div key={student.id}>
             <Link to={`/student/${student.id}`}>
-              <h2>{name}</h2>
+              <h2 className = 'custom-enrollee'>{name}</h2>
             </Link>             
           </div>
         );

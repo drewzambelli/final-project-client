@@ -94,7 +94,7 @@ handleSubmit = async event => {
     //     }
     // }
     const urlPattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))(?:\?.*)?$/i;
-    if (this.state.campusPhoto.trim() && !urlPattern.test(this.state.campusPhoto.trim())) {
+    if (this.state.campusPhoto.trim() && !urlPattern.test(this.state.campusPhoto.trim()) && this.state.campusPhoto.trim() !== "/blankcampus.jpg" && this.state.campusPhoto.trim() !== "") {
       errors.campusPhoto = "The provided campus photo URL is invalid.";
     }
 
