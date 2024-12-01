@@ -83,15 +83,19 @@ handleSubmit = async event => {
     const updateCampusPhoto = this.state.campusPhoto.trim() === "" ? "/blankcampus.jpg" : this.state.campusPhoto;
     
     // Validate campus profile shot URL here - I was getting strange behaviour using errors above
-    if (this.state.campusPhoto.trim()) {
-        try {
-            const response = await fetch(this.state.campusPhoto.trim(), { method: 'HEAD' });
-            if (!response.ok) {
-                errors.campusPhoto = "The provided campus photo URL is invalid.";
-            }
-        } catch (err) {
-            errors.campusPhoto = "The provided campus photo URL is invalid.";
-        }
+    // if (this.state.campusPhoto.trim()) {
+    //     try {
+    //         const response = await fetch(this.state.campusPhoto.trim(), { method: 'HEAD' });
+    //         if (!response.ok) {
+    //             errors.campusPhoto = "The provided campus photo URL is invalid.";
+    //         }
+    //     } catch (err) {
+    //         errors.campusPhoto = "The provided campus photo URL is invalid.";
+    //     }
+    // }
+    const urlPattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))(?:\?.*)?$/i;
+    if (this.state.campusPhoto.trim() && !urlPattern.test(this.state.campusPhoto.trim())) {
+      errors.campusPhoto = "The provided campus photo URL is invalid.";
     }
 
     // If there are errors, stop the user from submitting

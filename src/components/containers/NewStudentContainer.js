@@ -84,15 +84,21 @@ class NewStudentContainer extends Component {
      }
 
     // Validate campus profile shot URL here - I was getting strange behaviour using errors above
-    if (this.state.profilePhoto.trim()) {
-      try {
-          const response = await fetch(this.state.profilePhoto.trim(), { method: 'HEAD' });
-          if (!response.ok) {
-              errors.profilePhoto = "The provided student photo URL is invalid.";
-          }
-      } catch (err) {
-          errors.profilePhoto = "The provided student photo URL is invalid.";
-      }
+    // if (this.state.profilePhoto.trim()) {
+    //   try {
+    //       const response = await fetch(this.state.profilePhoto.trim(), { method: 'HEAD' });
+    //       if (!response.ok) {
+    //           errors.profilePhoto = "The provided student photo URL is invalid.";
+    //       }
+    //   } catch (err) {
+    //       errors.profilePhoto = "The provided student photo URL is invalid.";
+    //   }
+    // }
+    //New URL validation - was getting lots of bugs with old routine above. Pulled URLPATTERN
+    //from StackOverflow.
+    const urlPattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))(?:\?.*)?$/i;
+    if (profilePhoto.trim() && !urlPattern.test(profilePhoto.trim())) {
+      errors.profilePhoto = "The provided student photo URL is invalid.";
     }
 
     if (Object.keys(errors).length > 0) {
