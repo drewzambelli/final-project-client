@@ -96,14 +96,25 @@ h1 {
   width: 400px;
 }
 
-{/*Single campus Enrolled students*/}
+{/*Single campus Enrolled students - DO NOT change 15px. It keeps name + delete button aligned*/}
 .custom-enrollee {
   margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
   color:#8b0000;
 }
 
 .custom-enrollee:hover {
   color: #313ef5;
+}
+
+{/*Single campus Enrolled students alinging delete button and name*/}
+.custom-alignment{
+  display: flex;
+  text-align: center;
+  margin-top: 10px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 /* CAMPUS STUFF */
@@ -235,4 +246,59 @@ h1 {
   justify-content: center;  
   gap: 20px; 
   margin-top: 20px;  
+}
+
+{/*FORMS!!!!*/}
+
+.form-field {
+  display: flex;
+  align-items: column; /*don't change this. keeps text aligned with input field*/
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  flex: 1;
+  font-weight: bold;
+  color: #11153e;
+  margin-right: 10px;
+}
+
+.form-field input,
+.form-field textarea {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.input-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container input,
+.input-container textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.input-container img{
+  margin: 0px;
+}
+
+textarea {
+  resize: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }

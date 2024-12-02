@@ -53,42 +53,52 @@ const NewCampusView = (props) => {
               Add a Campus
             </Typography>
           </div>
-          <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
-            <input type="text" name="name" onChange ={(e) => handleChange(e)} />
-            {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
-            <br/>
-            <br/>
+          <form style={{textAlign: 'left', width: "80%", margin: 'auto'}} onSubmit={(e) => handleSubmit(e)}>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
-            <input type="text" name="address" onChange={(e) => handleChange(e)} />
-            {errors.address && <p style={{ color: "red" }}>{errors.address}</p>}
-            <br/>
-            <br/>
+            <div className="form-field">
+              <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
+              <div className="input-container">
+                <input type="text" name="name" onChange ={(e) => handleChange(e)} />
+                {errors.name && <p className="error-message">{errors.name}</p>}
+              </div>
+            </div>
 
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
-            <input type="text" name="description" onChange ={(e) => handleChange(e)} />
-            {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
-            <br/>
-            <br/>
+            <div className="form-field">
+              <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
+              <div className="input-container">
+                <input type="text" name="address" onChange={(e) => handleChange(e)} />
+                {errors.address && <p className="error-message">{errors.address}</p>}
+              </div>
+            </div>
 
+            <div className="form-field">
+              <label style= {{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
+              <div className="input-container">
+                <textarea type="text" name="description" rows = "4" onChange ={(e) => handleChange(e)} />
+                {errors.description && <p className="error-message">{errors.description}</p>}
+              </div>
+            </div>
+
+            <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Photo URL: </label>
-            <input
-              type="text"
-              name="campusPhoto"
-              onChange={(e) => handleChange(e)}
-              placeholder="Enter the URL of the campus photo"
-            />
-            {errors.campusPhoto && <p style={{ color: 'red' }}>{errors.campusPhoto}</p>}
-            <br />
-            <br />
-
-            <Button variant="contained" color="primary" type="submit">
-              Submit
-            </Button>
-            <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
-              Cancel
-            </Button>
+              <div className="input-container">
+                <input
+                  type="text"
+                  name="campusPhoto"
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Enter the URL of the campus photo"
+                />
+                {errors.campusPhoto && <p className="error-message">{errors.campusPhoto}</p>}
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '20px'}}>
+              <Button variant="contained" color="primary" type="submit" style={{ marginRight: '10px' }}>
+                Submit
+              </Button>
+              <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
+                Cancel
+              </Button>
+            </div>
             <br/>
             <br/>
           </form>

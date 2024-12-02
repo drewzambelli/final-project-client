@@ -56,7 +56,7 @@ class NewCampusContainer extends Component {
     //people entering 2 of the same name
     const campusExists = await this.checkCampusNameExists(this.state.name);
     if (campusExists) {
-      errors.name = `The campus name '${this.state.name}' is already registered to another campus. Please modify your campus name.`;
+      errors.name = `${this.state.name} is registered to another campus.`;
     }
 
     // Validate campus profile shot URL here - I was getting strange behaviour using errors above

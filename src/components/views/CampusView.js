@@ -8,13 +8,19 @@ import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import '../../styles/globalStyles.css';
 import { useHistory } from 'react-router-dom'; //go back button takes you back to previous page
+import { useState } from "react"; 
 
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const {campus} = props;
+  const {campus, deleteStudent} = props;
   const history = useHistory(); //for Go Back button
+  const [students, setStudents] = useState(campus.students || []); // Local state for students
 
+  const handleDeleteStudent = async (studentId) => {
+    await deleteStudent(studentId, campus.id); // Calling delete here
+    setStudents(students.filter((student) => student.id !== studentId)); // Update them
+  };
   // Render a single Campus view with list of its students
   return (
     <div className = "single-campus-container" >
@@ -38,10 +44,14 @@ const CampusView = (props) => {
       campus.students.map( student => {
         let name = student.firstname + " " + student.lastname;
         return (
-          <div key={student.id}>
+          <div key={student.id} className = "custom-alignment">
             <Link to={`/student/${student.id}`}>
               <h2 className = 'custom-enrollee'>{name}</h2>
-            </Link>             
+            </Link>    
+            <button 
+            style={{ marginLeft: "10px", fontSize: '12px', padding: "4px 8px"}} 
+            onClick={() => handleDeleteStudent(student.id)}
+            > Delete </button>        
           </div>
         );
       })

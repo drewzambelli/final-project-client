@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
     const history = useHistory(); //cancel button to prev page
     return (
         <div className = "edit-campus-container">
-            <h1>Edit Campus</h1>
+            <h1>-Edit Campus-</h1>
             <div className={classes.root}>
                 <div className={classes.formContainer}>
                     <div className={classes.formTitle}>
@@ -50,77 +50,88 @@ const useStyles = makeStyles(() => ({
                             }}
                         >
                             Edit Campus Information
-                            <br />
-                            *All Fields Are Required*
                         </Typography>
                     </div>
-                    <form style={{ textAlign: "center" }} onSubmit={handleSubmit}>
+                    <form style={{ textAlign: "left", width: "80%", margin: 'auto'}} onSubmit={handleSubmit}>
+
+                    <div className="form-field">
                         <label style={{ color: "#11153e", fontWeight: "bold" }}>
                             Name:
                         </label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={campus.name}
-                            onChange={handleChange}
-                        />
-                        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
-                        <br />
-                        <br />
-
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                name="name"
+                                value={campus.name}
+                                onChange={handleChange}
+                            />
+                            {errors.name && <p className="error-message" style={{ color: "red" }}>{errors.name}</p>}
+                        </div>
+                    </div>
+                    
+                    <div className="form-field">
                         <label style={{ color: "#11153e", fontWeight: "bold" }}>
                             Address:
                         </label>
-                        <input
-                            type="text"
-                            name="address"
-                            value={campus.address}
-                            onChange={handleChange}
-                        />
-                        {errors.address && (
-                            <p style={{ color: "red" }}>{errors.address}</p>
-                        )}
-                        <br />
-                        <br />
-
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                name="address"
+                                value={campus.address}
+                                onChange={handleChange}
+                            />
+                            {errors.address && (
+                                <p className="error-message" style={{ color: "red" }}>{errors.address}</p>
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div className="form-field">
                         <label style={{ color: "#11153e", fontWeight: "bold" }}>
                             Description:
                         </label>
-                        <input
+                        <div className="input-container">
+                            <textarea
+                                type="text"
+                                name="description"
+                                rows = "4"
+                                value={campus.description}
+                                onChange={handleChange}
+                            />
+                            {errors.description && (
+                                <p className="error-message" style={{ color: "red" }}>{errors.description}</p>
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div className="form-field">
+                        <label style={{ color: '#11153e', fontWeight: 'bold'}}>Photo URL: </label>
+                        <div className="input-container">
+                            <input
                             type="text"
-                            name="description"
-                            value={campus.description}
-                            onChange={handleChange}
-                        />
-                        {errors.description && (
-                            <p style={{ color: "red" }}>{errors.description}</p>
-                        )}
-                        <br />
-                        <br />
-                        <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Photo URL: </label>
-                        <input
-                        type="text"
-                        name="campusPhoto"
-                        value= {campus.campusPhoto}
-                        onChange={(e) => handleChange(e)}
-                        placeholder="Enter the URL of the profile photo"
-                        />
-                        <br/>
-                        {/*allow user to preview picture - the absolute pathing for blankprofile is super important because i'm displaying the image based on what
-                        is in the URL field. If i don't have the first slash, nothing is displayed. */}
-                        <img src={campus.campusPhoto.trim() === '' ? '/blankcampus.jpg' : campus.campusPhoto} alt="Profile Preview" style={{ width: '150px', marginTop: '10px' }} />
-                        {errors.campusPhoto && <p style={{ color: 'red' }}>{errors.campusPhoto}</p>}
-                        <br />
-                        <br />
-
-                        <Button variant="contained" color="primary" type="submit">
+                            name="campusPhoto"
+                            value= {campus.campusPhoto}
+                            onChange={(e) => handleChange(e)}
+                            placeholder="Enter the URL of the profile photo"
+                            />
+                            {/*allow user to preview picture - the absolute pathing for blankprofile is super important because i'm displaying the image based on what
+                            is in the URL field. If i don't have the first slash, nothing is displayed. */}
+                            <img 
+                            src={campus.campusPhoto.trim() === '' ? '/blankcampus.jpg' : campus.campusPhoto} 
+                            alt="Profile Preview" 
+                            style={{ width: '150px' }} 
+                            />
+                            {errors.campusPhoto && <p className="error-message" style={{ color: 'red' }}>{errors.campusPhoto}</p>}
+                        </div>
+                    </div>
+                    <div style={{ textAlign: 'center', marginTop: '20px'}}>
+                        <Button variant="contained" color="primary" type="submit" style={{ marginRight: '10px' }}>
                             Update
                         </Button>
                         <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
                             Cancel
                         </Button>
-                        <br />
-                        <br />
+                    </div>
                     </form>
                 </div>
             </div>

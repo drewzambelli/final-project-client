@@ -22,7 +22,7 @@ const AllCampusesView = (props) => {
       //this way it has campus ID and knows where to appear
       setErrorMessages((prev) => ({
         ...prev,
-        [campus.id]: `Cannot delete campus "${campus.name}" because it has associated students.`,
+        [campus.id]: `Cannot delete ${campus.name} while it has enrolled students.`,
       }));
     } else {
       setErrorMessages((prev) => ({

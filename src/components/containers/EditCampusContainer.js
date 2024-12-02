@@ -76,7 +76,7 @@ handleSubmit = async event => {
     //campus already existed
     const campusExists = this.state.name !== this.props.campus.name && await this.checkCampusNameExists(this.state.name);
     if (campusExists) {
-      errors.name = `The campus name '${this.state.name}' is already registered to another campus. Please modify your campus name.`;
+      errors.name = `${this.state.name} is registered to another campus.`;
     }
 
     //Check profilePhoto completed

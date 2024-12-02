@@ -46,7 +46,7 @@ const NewStudentView = (props) => {
   return (
     <div className = "add-student-form ">
       
-      <h1>New Student</h1>
+      <h1>-New Student-</h1>
 
       <div className={classes.root}>
         <div className={classes.formContainer}>
@@ -57,88 +57,107 @@ const NewStudentView = (props) => {
               *All Fields Are Required*
             </Typography>
           </div>
-          <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
+          <form style={{textAlign: 'left', width: "80%", margin: 'auto'}} onSubmit={(e) => handleSubmit(e)}>
+          
+          <div className="form-field">
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
-            <input type="text" name="firstname" onChange ={(e) => handleChange(e)} />
-            {errors.firstname && <p style={{color: 'red'}}>{errors.firstname}</p>}
-            <br/>
-            <br/>
+            <div className="input-container">
+              <input type="text" name="firstname" onChange ={(e) => handleChange(e)} />
+              {errors.firstname && <p className="error-message" style={{color: 'red'}}>{errors.firstname}</p>}
+            </div>
+          </div>
 
+          <div className="form-field">
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
-            <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
-            {errors.lastname && <p style={{color: 'red'}}>{errors.lastname}</p>}
-            <br/>
-            <br/>
+            <div className="input-container">
+              <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
+              {errors.lastname && <p className="error-message" style={{color: 'red'}}>{errors.lastname}</p>}
+            </div>
+          </div>
 
+          <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Age: </label>
-            <input type="number" name="age" onChange={(e) => handleChange(e)} />
-            {errors.age && <p style={{color: 'red'}}>{errors.age}</p>}
-            <br />
-            <br />
+            <div className="input-container">
+              <input type="number" name="age" onChange={(e) => handleChange(e)} style={{ maxWidth: '50px', width: '100%' }}/>
+              {errors.age && <p className="error-message" style={{color: 'red'}}>{errors.age}</p>}
+            </div>
+          </div>
 
+          <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Year: </label>
-            <select name="yearInSchool" onChange={(e) => handleChange(e)}>
-            <option value="">Select a Year</option>
-              <option value="freshman">Freshman</option>
-              <option value="sophomore">Sophomore</option>
-              <option value="junior">Junior</option>
-              <option value="senior">Senior</option>
-              <option value="5th+">5th Year or More</option>
-            </select>
-            {errors.yearInSchool && <p style={{color: 'red'}}>{errors.yearInSchool}</p>}
-            <br />
-            <br />
+            <div className="input-container">
+              <select name="yearInSchool" onChange={(e) => handleChange(e)} style={{ maxWidth: '120px', width: '100%' }}>
+              <option value="">Select a Year</option>
+                <option value="freshman">Freshman</option>
+                <option value="sophomore">Sophomore</option>
+                <option value="junior">Junior</option>
+                <option value="senior">Senior</option>
+                <option value="5th+">5th Year or More</option>
+              </select>
+              {errors.yearInSchool && <p className="error-message" style={{color: 'red'}}>{errors.yearInSchool}</p>}
+              </div>
+          </div>
 
+          <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
-            <input type="email" name="email" onChange={(e) => handleChange(e)} />
-            {errors.email && <p style={{color: 'red'}}>{errors.email}</p>}
-            <br />
-            <br />
+            <div className="input-container">
+              <input type="email" name="email" onChange={(e) => handleChange(e)} />
+              {errors.email && <p className="error-message" style={{color: 'red'}}>{errors.email}</p>}
+            </div>
+          </div>
 
+          <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Address: </label>
-            <input type="text" name="address" onChange={(e) => handleChange(e)} />
-            {errors.address && <p style={{color: 'red'}}>{errors.address}</p>}
-            <br />
-            <br />
+            <div className="input-container">
+              <input type="text" name="address" onChange={(e) => handleChange(e)} />
+              {errors.address && <p className="error-message" style={{color: 'red'}}>{errors.address}</p>}
+            </div>
+          </div>
 
+          <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-            <input type="number" step="0.01" min="0" max="4" name="gpa" onChange={(e) => handleChange(e)} />
-            {errors.gpa && <p style={{ color: 'red' }}>{errors.gpa}</p>}
-            <br />
-            <br />
+            <div className="input-container">
+              <input type="number" step="0.01" min="0" max="4" name="gpa" onChange={(e) => handleChange(e)} style={{ maxWidth: '50px', width: '100%' }}/>
+              {errors.gpa && <p className="error-message" style={{ color: 'red' }}>{errors.gpa}</p>}
+            </div>
+          </div>
             
+          <div className="form-field">
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus: </label>
-            
-            <select name="campusId" value={props.selectedCampusId || ""} onChange={(e) => handleChange(e)}>
-              <option value="">Select a Campus</option>
-              {props.allCampuses.map((campuses) => (
-              <option key={campuses.id} value={campuses.id}>
-                {campuses.name}
-              </option>
-              ))}
+            <div className="input-container">
+                <select name="campusId" value={props.selectedCampusId || ""} onChange={(e) => handleChange(e)} style={{ maxWidth: '150px', width: '100%' }}>
+                  <option value="">Select a Campus</option>
+                  {props.allCampuses.map((campuses) => (
+                  <option key={campuses.id} value={campuses.id}>
+                    {campuses.name}
+                  </option>
+                  ))}
 
-            </select>
-            {errors.campusId && <p style={{color: 'red'}}>{errors.campusId}</p>}
-            <br />
-            <br /> 
+                </select>
+                {errors.campusId && <p className="error-message" style={{color: 'red'}}>{errors.campusId}</p>}
+              </div>
+            </div> 
 
-            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Profile Photo URL: </label>
-            <input
-              type="text"
-              name="profilePhoto"
-              onChange={(e) => handleChange(e)}
-              placeholder="Enter the URL of the profile photo"
-            />
-            {errors.profilePhoto && <p style={{ color: 'red' }}>{errors.profilePhoto}</p>}
-            <br />
-            <br />
-
-            <Button variant="contained" color="primary" type="submit">
-              Submit
-            </Button>
-            <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
-              Cancel
-            </Button>
+            <div className="form-field">
+              <label style={{ color: '#11153e', fontWeight: 'bold' }}>Profile Photo URL: </label>
+              <div className="input-container">
+                <input
+                  type="text"
+                  name="profilePhoto"
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Enter the URL of the profile photo"
+                />
+                {errors.profilePhoto && <p className="error-message" style={{ color: 'red' }}>{errors.profilePhoto}</p>}
+              </div>
+            </div> 
+            <div style={{ textAlign: 'center', marginTop: '20px'}}>
+              <Button variant="contained" color="primary" type="submit" style={{ marginRight: '10px' }}>
+                Submit
+              </Button>
+              <Button variant="contained" color="secondary" onClick={() => history.goBack()}>
+                Cancel
+              </Button>
+            </div>
             <br/>
             <br/>
           </form>
