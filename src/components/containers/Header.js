@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import '@fontsource/poppins';
 
 import { Link } from 'react-router-dom';
 import { colors } from '@material-ui/core';
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     textAlign: 'left',
     fontType: 'bold',
-    fontFamily: 'poppins', /*This is the font I want on the site*/
+    fontFamily: "'sans-serif'", /*This is the font I want here but i want poppins elsewhere*/
     fontSize: '35px', 
     color: '#ebc220' /*i want something closer to gold*/
   },
